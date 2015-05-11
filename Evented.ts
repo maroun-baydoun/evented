@@ -21,82 +21,89 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
- class Evented {
-  private listeners: Array<Function>;
-  private static globalListeners: Array<Function> = [];
-  constructor() {
-    this.listeners = [];
-  }
-
-  on(eventName: string, listener: Function): void {
-    if (this.listeners[eventName] === undefined) {
-        this.listeners[eventName] = [];
+class Evented {
+    private listeners: Array<Function>;
+    private static globalListeners: Array<Function> = [];
+    constructor() {
+        this.listeners = [];
     }
 
-    this.listeners[eventName].push(listener);
+    on(eventName: string, listener: Function): void {
+        if (this.listeners[eventName] === undefined) {
+            this.listeners[eventName] = [];
+        }
 
-  }
+        this.listeners[eventName].push(listener);
 
-  off(eventName: string, listener: Function): void {
+    }
 
-      if (this.listeners[eventName] instanceof Array) {
-          var listeners = this.listeners[eventName],
-              i = 0,
-              len = listeners.length;
-          for (; i < len; i++) {
-              if (listeners[i] === listener) {
-                  listeners.splice(i, 1);
-                  break;
-              }
-          }
-      }
-  }
+    off(eventName: string, listener: Function): void {
 
-  fire(eventName: string, eventArgs: Object = undefined, eventTarget: Object = this): void {
-
-      if (this.listeners[eventName] instanceof Array) {
-        var listeners = this.listeners[eventName],
-            i = 0,
-            len = listeners.length;
-          for (; i < len; i++) {
-              listeners[i].call(this, {"name": eventName, "args": eventArgs, "target": eventTarget} );
-          }
-      }
-  }
-
-
-  static fire(eventName: string, eventArgs: Object = undefined, eventTarget: Object = undefined): void {
-    if (Evented.globalListeners[eventName] instanceof Array) {
-      var listeners = Evented.globalListeners[eventName],
-          i = 0,
-          len = listeners.length;
-        for (; i < len; i++) {
-            listeners[i].call(Evented, {"name": eventName, "args": eventArgs, "target": eventTarget});
+        if (this.listeners[eventName] instanceof Array) {
+            var listeners = this.listeners[eventName],
+                i = 0,
+                len = listeners.length;
+            for (; i < len; i++) {
+                if (listeners[i] === listener) {
+                    listeners.splice(i, 1);
+                    break;
+                }
+            }
         }
     }
-  }
 
-  static on(eventName: string, listener: Function): void {
-    if (Evented.globalListeners[eventName] === undefined) {
-      Evented.globalListeners[eventName] = [];
+    fire(eventName: string, eventArgs: Object = undefined, eventTarget: Object = this): void {
+
+        if (this.listeners[eventName] instanceof Array) {
+            var listeners = this.listeners[eventName],
+                i = 0,
+                len = listeners.length;
+            for (; i < len; i++) {
+                listeners[i].call(this, { "name": eventName, "args": eventArgs, "target": eventTarget });
+            }
+        }
     }
 
-    Evented.globalListeners[eventName].push(listener);
-  }
+    listensTo(eventName: string): boolean {
+      return (this.listeners[eventName] instanceof Array && this.listeners[eventName].length > 0);
+    }
 
-  static off(eventName: string, listener: Function): void {
-      if (Evented.globalListeners[eventName] instanceof Array) {
-          var listeners = Evented.globalListeners[eventName],
-              i = 0,
-              len = listeners.length;
-          for (; i < len; i++) {
-              if (listeners[i] === listener) {
-                  listeners.splice(i, 1);
-                  break;
-              }
-          }
-      }
-  }
+    static fire(eventName: string, eventArgs: Object = undefined, eventTarget: Object = undefined): void {
+        if (Evented.globalListeners[eventName] instanceof Array) {
+            var listeners = Evented.globalListeners[eventName],
+                i = 0,
+                len = listeners.length;
+            for (; i < len; i++) {
+                listeners[i].call(Evented, { "name": eventName, "args": eventArgs, "target": eventTarget });
+            }
+        }
+    }
+
+    static on(eventName: string, listener: Function): void {
+        if (Evented.globalListeners[eventName] === undefined) {
+            Evented.globalListeners[eventName] = [];
+        }
+
+        Evented.globalListeners[eventName].push(listener);
+    }
+
+    static off(eventName: string, listener: Function): void {
+        if (Evented.globalListeners[eventName] instanceof Array) {
+            var listeners = Evented.globalListeners[eventName],
+                i = 0,
+                len = listeners.length;
+            for (; i < len; i++) {
+                if (listeners[i] === listener) {
+                    listeners.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    static listensTo(eventName: string): boolean {
+      return (Evented.globalListeners[eventName] instanceof Array && Evented.globalListeners[eventName].length > 0);
+    }
 }
 
 export = Evented;

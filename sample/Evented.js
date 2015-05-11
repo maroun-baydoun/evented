@@ -52,6 +52,9 @@ define(["require", "exports"], function (require, exports) {
                 }
             }
         };
+        Evented.prototype.listensTo = function (eventName) {
+            return (this.listeners[eventName] instanceof Array && this.listeners[eventName].length > 0);
+        };
         Evented.fire = function (eventName, eventArgs, eventTarget) {
             if (eventArgs === void 0) { eventArgs = undefined; }
             if (eventTarget === void 0) { eventTarget = undefined; }
@@ -78,6 +81,9 @@ define(["require", "exports"], function (require, exports) {
                     }
                 }
             }
+        };
+        Evented.listensTo = function (eventName) {
+            return (Evented.globalListeners[eventName] instanceof Array && Evented.globalListeners[eventName].length > 0);
         };
         Evented.globalListeners = [];
         return Evented;

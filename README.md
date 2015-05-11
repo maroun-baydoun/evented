@@ -7,12 +7,14 @@ Fire and listen to events in TypeScript
 obj.fire(eventName, eventArgs, eventTarget);
 obj.on(eventName, listener);
 obj.off(eventName, listener);
+obj.listensTo(eventName);
 ```
 ###### Statically
 ```typescript
 Evented.fire(eventName, eventArgs, eventTarget);
 Evented.on(eventName, listener);
 Evented.off(eventName, listener);
+Evented.listensTo(eventName);
 ```
 
 #### Usage example
