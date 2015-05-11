@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "Evented"], function (require, exports, Evented) {
+define(["require", "exports", "Evented"], function (require, exports, evented) {
     var User = (function (_super) {
         __extends(User, _super);
         function User(userName) {
@@ -28,6 +28,6 @@ define(["require", "exports", "Evented"], function (require, exports, Evented) {
             return true;
         };
         return User;
-    })(Evented);
+    })(evented.Evented);
     return User;
 });

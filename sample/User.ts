@@ -1,6 +1,6 @@
- import Evented = require("Evented");
+ import evented = require("Evented");
 
- class User extends Evented {
+ class User extends evented.Evented {
 
   private _userName: string;
 

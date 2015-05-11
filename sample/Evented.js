@@ -48,7 +48,7 @@ define(["require", "exports"], function (require, exports) {
             if (this.listeners[eventName] instanceof Array) {
                 var listeners = this.listeners[eventName], i = 0, len = listeners.length;
                 for (; i < len; i++) {
-                    listeners[i].call(this, { "name": eventName, "args": eventArgs, "target": eventTarget });
+                    listeners[i].call(this, new Event(eventName, eventArgs, eventTarget));
                 }
             }
         };
@@ -61,7 +61,7 @@ define(["require", "exports"], function (require, exports) {
             if (Evented.globalListeners[eventName] instanceof Array) {
                 var listeners = Evented.globalListeners[eventName], i = 0, len = listeners.length;
                 for (; i < len; i++) {
-                    listeners[i].call(Evented, { "name": eventName, "args": eventArgs, "target": eventTarget });
+                    listeners[i].call(Evented, new Event(eventName, eventArgs, eventTarget));
                 }
             }
         };
@@ -88,5 +88,36 @@ define(["require", "exports"], function (require, exports) {
         Evented.globalListeners = [];
         return Evented;
     })();
-    return Evented;
+    exports.Evented = Evented;
+    var Event = (function () {
+        function Event(name, args, target) {
+            this._name = name;
+            this._args = args;
+            this._target = target;
+        }
+        Object.defineProperty(Event.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Event.prototype, "args", {
+            get: function () {
+                return this._args;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Event.prototype, "target", {
+            get: function () {
+                return this._target;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        return Event;
+    })();
+    exports.Event = Event;
+    ;
 });

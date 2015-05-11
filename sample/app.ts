@@ -1,4 +1,5 @@
 import User = require("User");
+import evented = require("Evented");
 
 var loginButton: HTMLInputElement = <HTMLInputElement>document.getElementById("loginButton"),
     passwordField: HTMLInputElement = <HTMLInputElement> document.getElementById("passwordField"),
@@ -19,7 +20,7 @@ loginButton.addEventListener("click", function() {
 });
 
 
-user.on("loggedIn", function(e) {
+user.on("loggedIn", function(e: evented.Event) {
     notice.classList.add("alert-success");
     notice.innerText = "Login successful";
     notice.style.display = "block";
@@ -29,7 +30,7 @@ user.on("loggedIn", function(e) {
     loginAttemps = 0;
 });
 
-user.on("invalidLogin", function(e) {
+user.on("invalidLogin", function(e: evented.Event) {
     notice.classList.add("alert-danger");
     notice.innerText = "Try again! (Hint:The correct password is 'password')";
     notice.style.display = "block";
@@ -41,7 +42,7 @@ user.on("invalidLogin", function(e) {
     }
 });
 
-user.on("accountLocked", function(e) {
+user.on("accountLocked", function(e: evented.Event) {
     notice.classList.add("alert-danger");
     notice.innerText = "Your account is locked due to " + e.args.reason + ".";
     notice.style.display = "block";

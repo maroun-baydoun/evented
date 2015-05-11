@@ -21,14 +21,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-class Evented {
-    private listeners: Array<Function>;
-    private static globalListeners: Array<Function> = [];
+export class Evented {
+    private listeners: Array<Listener>;
+    private static globalListeners: Array<Listener> = [];
     constructor() {
         this.listeners = [];
     }
 
-    on(eventName: string, listener: Function): void {
+    on(eventName: string, listener: Listener): void {
         if (this.listeners[eventName] === undefined) {
             this.listeners[eventName] = [];
         }
@@ -37,7 +37,7 @@ class Evented {
 
     }
 
-    off(eventName: string, listener: Function): void {
+    off(eventName: string, listener: Listener): void {
 
         if (this.listeners[eventName] instanceof Array) {
             var listeners = this.listeners[eventName],
@@ -59,7 +59,7 @@ class Evented {
                 i = 0,
                 len = listeners.length;
             for (; i < len; i++) {
-                listeners[i].call(this, { "name": eventName, "args": eventArgs, "target": eventTarget });
+                listeners[i].call(this, new Event(eventName, eventArgs, eventTarget));
             }
         }
     }
@@ -74,12 +74,12 @@ class Evented {
                 i = 0,
                 len = listeners.length;
             for (; i < len; i++) {
-                listeners[i].call(Evented, { "name": eventName, "args": eventArgs, "target": eventTarget });
+                listeners[i].call(Evented, new Event(eventName, eventArgs, eventTarget));
             }
         }
     }
 
-    static on(eventName: string, listener: Function): void {
+    static on(eventName: string, listener: Listener): void {
         if (Evented.globalListeners[eventName] === undefined) {
             Evented.globalListeners[eventName] = [];
         }
@@ -87,7 +87,7 @@ class Evented {
         Evented.globalListeners[eventName].push(listener);
     }
 
-    static off(eventName: string, listener: Function): void {
+    static off(eventName: string, listener: Listener): void {
         if (Evented.globalListeners[eventName] instanceof Array) {
             var listeners = Evented.globalListeners[eventName],
                 i = 0,
@@ -106,4 +106,30 @@ class Evented {
     }
 }
 
-export = Evented;
+export class Event {
+  private _name: string;
+  private _args: any;
+  private _target: Object;
+
+  constructor(name: string, args?: any, target?: Object) {
+    this._name = name;
+    this._args = args;
+    this._target = target;
+  }
+
+  get name(): string{
+    return this._name;
+  }
+
+  get args(): any{
+    return this._args;
+  }
+
+  get target(): Object{
+    return this._target;
+  }
+}
+
+export interface Listener {
+    (event: Event): void;
+};
