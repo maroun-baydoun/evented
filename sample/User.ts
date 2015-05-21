@@ -1,6 +1,6 @@
- import evented = require("Evented");
+import {Evented} from "../Evented";
 
- class User extends evented.Evented {
+ class User extends Evented {
 
   private _userName: string;
 
