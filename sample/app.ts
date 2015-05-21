@@ -20,7 +20,8 @@ loginButton.addEventListener("click", function() {
 });
 
 
-user.on("loggedIn", function(e: Event) {
+user.on("loggedIn", (e: Event) => {
+
     notice.classList.add("alert-success");
     notice.innerText = "Login successful";
     notice.style.display = "block";
@@ -30,7 +31,7 @@ user.on("loggedIn", function(e: Event) {
     loginAttemps = 0;
 });
 
-user.on("invalidLogin", function(e: Event) {
+user.on("invalidLogin", (e: Event) => {
     notice.classList.add("alert-danger");
     notice.innerText = "Try again! (Hint:The correct password is 'password')";
     notice.style.display = "block";
@@ -42,7 +43,7 @@ user.on("invalidLogin", function(e: Event) {
     }
 });
 
-user.on("accountLocked", function(e: Event) {
+user.on("accountLocked", (e: Event) => {
     notice.classList.add("alert-danger");
     notice.innerText = "Your account is locked due to " + e.args.reason + ".";
     notice.style.display = "block";
