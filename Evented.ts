@@ -1,12 +1,12 @@
 
 export class Evented {
 
-    private listeners: Array<Listener>;
-    private static globalListeners: Array<Listener> = [];
+    private listeners: { [eventName: string]: Array<Listener>};
+    private static globalListeners: { [eventName: string]: Array<Listener>} = {};
 
     constructor() {
 
-        this.listeners = [];
+        this.listeners = {};
     }
 
     on(eventName: string, listener: Listener): void {
@@ -52,7 +52,7 @@ export class Evented {
 
     private static _on(instance: Evented, eventName: string, listener: Listener): void {
 
-        var listeners: Listener[];
+        var listeners: { [eventName: string]: Array<Listener>};
 
         if (instance) {
             listeners = instance.listeners;
@@ -70,7 +70,7 @@ export class Evented {
 
     private static _off(instance: Evented, eventName: string, listener: Listener): void {
 
-        var listeners: Listener[],
+        var listeners: { [eventName: string]: Array<Listener>},
             eventListeners: Listener[],
             i: number,
             length: number;
@@ -85,7 +85,7 @@ export class Evented {
         if (listeners[eventName] instanceof Array) {
             eventListeners = listeners[eventName];
             i = 0;
-            length = listeners.length;
+            length = eventListeners.length;
             for (; i < length; i++) {
                 if (eventListeners[i] === listener) {
                     eventListeners.splice(i, 1);
@@ -98,7 +98,7 @@ export class Evented {
 
     private static _fire(instance: Evented, eventName: string, eventArgs: Object = undefined, eventTarget: Object = undefined): void {
 
-        var listeners: Listener[],
+        var listeners: { [eventName: string]: Array<Listener>},
             eventListeners: Listener[],
             i: number,
             length: number,
@@ -125,7 +125,7 @@ export class Evented {
 
     private static _listensTo(instance: Evented, eventName: string): boolean {
 
-        var listeners: Listener[];
+        var listeners: { [eventName: string]: Array<Listener>};
 
         if (instance) {
             listeners = instance.listeners;
