@@ -9,6 +9,10 @@ export class Evented {
         this.listeners = {};
     }
 
+    get className(): string {
+        return this.constructor.toString().match(/function ([^\(]+)/)[1];
+    }
+
     on(eventName: string, listener: Listener): void {
 
         Evented._on(this, eventName, listener);
