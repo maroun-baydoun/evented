@@ -1,0 +1,27 @@
+{
+  "name": "evented",
+  "version": "1.0.0",
+  "description": "Fire and listen to events in TypeScript",
+  "main": "Evented.js",
+  "scripts": {
+    "build": "cd node_modules/.bin & tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maroun-baydoun/evented.git"
+  },
+  "keywords": [
+    "typescript",
+    "events"
+  ],
+  "author": "Maroun Baydoun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maroun-baydoun/evented/issues"
+  },
+  "homepage": "https://github.com/maroun-baydoun/evented#readme",
+  "devDependencies": {
+    "typescript": "^2.0.6"
+  }
+}
