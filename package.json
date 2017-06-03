@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Fire and listen to events in TypeScript",
   "main": "evented.js",
+  "types": "evented.d.ts",
   "scripts": {
     "build": "cd node_modules/.bin & tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
