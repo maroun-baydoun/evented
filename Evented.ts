@@ -9,9 +9,9 @@ export class Evented {
         this.listeners = {};
     }
 
-    on(eventName: string, listener: Listener): void {
+    on(eventName: string, listener: Listener): () => void {
 
-        Evented._on(this, eventName, listener);
+        return Evented._on(this, eventName, listener);
 
     }
 
@@ -35,9 +35,9 @@ export class Evented {
         Evented._fire(undefined, eventName, eventArgs, eventTarget);
     }
 
-    static on(eventName: string, listener: Listener): void {
+    static on(eventName: string, listener: Listener): () => void {
 
-        Evented._on(undefined, eventName, listener);
+        return Evented._on(undefined, eventName, listener);
     }
 
     static off(eventName: string, listener: Listener): void {
@@ -50,7 +50,7 @@ export class Evented {
         return Evented._listensTo(undefined, eventName);
     }
 
-    private static _on(instance: Evented | undefined, eventName: string, listener: Listener): void {
+    private static _on(instance: Evented | undefined, eventName: string, listener: Listener): () => void {
 
         let listeners: { [eventName: string]: Array<Listener>};
 
@@ -65,6 +65,10 @@ export class Evented {
         }
 
         listeners[eventName].push(listener);
+
+        return () => {
+          Evented._off(instance, eventName, listener);
+        };
 
     }
 
