@@ -24,16 +24,16 @@ class User extends Evented {
   ...
 }
 
-var user = new User();
+let user = new User();
 
-user.on("loggedIn", function(e){
+user.on("loggedIn", (e) => {
   //Do something on user login
 });
 
 //Fire the event after authentication
 user.fire("loggedIn");
 
-Evented.on("userLoggedOut", function(e){
+Evented.on("userLoggedOut", (e) => {
   //Do something on user logout
 });
 

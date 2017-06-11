@@ -1,5 +1,5 @@
 
-import {Event, Evented} from "../evented";
+import {Evented} from "../evented";
 
 class User extends Evented {
   loggedIn: boolean;
@@ -29,10 +29,11 @@ describe("User", () => {
 
   it("handles a fired event with on()", () => {
     let fired = false;
-    user.on("loggedIn", (e: Event) => {
+    user.on<{time: Date}>("loggedIn", (e) => {
       fired = true;
-      expect(e.args.hasOwnProperty("time")).toBe(true);
-      expect(e.args.time).toBe(now);
+      expect(e.args).toBeDefined();
+      expect(e.args!.hasOwnProperty("time")).toBe(true);
+      expect(e.args!.time).toBe(now);
     });
     user.logIn();
     expect(fired).toBe(true);

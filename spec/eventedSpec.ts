@@ -1,13 +1,14 @@
 
-import {Event, Evented} from "../evented";
+import {Evented} from "../evented";
 
 describe("Evented", () => {
   it("handles a fired event with on()", () => {
     let fired = false;
-    Evented.on("myEvent1", (e: Event) => {
+    Evented.on<{myArg: string}>("myEvent1", (e) => {
       fired = true;
-      expect(e.args.hasOwnProperty("myArg")).toBe(true);
-      expect(e.args.myArg).toBe("Some random value");
+      expect(e.args).toBeDefined();
+      expect(e.args!.hasOwnProperty("myArg")).toBe(true);
+      expect(e.args!.myArg).toBe("Some random value");
     });
     Evented.fire("myEvent1", {myArg: "Some random value"});
     expect(fired).toBe(true);

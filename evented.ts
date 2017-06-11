@@ -9,9 +9,9 @@ export class Evented {
         this.listeners = {};
     }
 
-    on(eventName: string, listener: Listener): () => void {
+    on<T>(eventName: string, listener: Listener<T>): () => void {
 
-        return Evented._on(this, eventName, listener);
+        return Evented._on<T>(this, eventName, listener);
 
     }
 
@@ -20,9 +20,9 @@ export class Evented {
         Evented._off(this, eventName, listener);
     }
 
-    fire(eventName: string, eventArgs?: Object, eventTarget: Object = this): void {
+    fire<T>(eventName: string, eventArgs?: T, eventTarget: Object = this): void {
 
-        Evented._fire(this, eventName, eventArgs, eventTarget);
+        Evented._fire<T>(this, eventName, eventArgs, eventTarget);
     }
 
     listensTo(eventName: string): boolean {
@@ -30,14 +30,14 @@ export class Evented {
         return Evented._listensTo(this, eventName);
     }
 
-    static fire(eventName: string, eventArgs?: Object, eventTarget?: Object ): void {
+    static fire<T>(eventName: string, eventArgs?: T, eventTarget?: Object ): void {
 
-        Evented._fire(undefined, eventName, eventArgs, eventTarget);
+        Evented._fire<T>(undefined, eventName, eventArgs, eventTarget);
     }
 
-    static on(eventName: string, listener: Listener): () => void {
+    static on<T>(eventName: string, listener: Listener<T>): () => void {
 
-        return Evented._on(undefined, eventName, listener);
+        return Evented._on<T>(undefined, eventName, listener);
     }
 
     static off(eventName: string, listener: Listener): void {
@@ -50,7 +50,7 @@ export class Evented {
         return Evented._listensTo(undefined, eventName);
     }
 
-    private static _on(instance: Evented | undefined, eventName: string, listener: Listener): () => void {
+    private static _on<T>(instance: Evented | undefined, eventName: string, listener: Listener<T>): () => void {
 
         let listeners: { [eventName: string]: Array<Listener>};
 
@@ -100,7 +100,7 @@ export class Evented {
 
     }
 
-    private static _fire(instance: Evented | undefined, eventName: string, eventArgs?: Object, eventTarget?: Object): void {
+    private static _fire<T>(instance: Evented | undefined, eventName: string, eventArgs?: T, eventTarget?: Object): void {
 
         let listeners: { [eventName: string]: Array<Listener>},
             eventListeners: Listener[],
@@ -141,12 +141,12 @@ export class Evented {
     }
 }
 
-export class Event {
+export class Event<T = any> {
     private _name: string;
-    private _args: any;
+    private _args: T | undefined;
     private _target: Object | undefined;
 
-    constructor(name: string, args?: any, target?: Object) {
+    constructor(name: string, args?: T, target?: Object) {
         this._name = name;
         this._args = args;
         this._target = target;
@@ -156,7 +156,7 @@ export class Event {
         return this._name;
     }
 
-    get args(): any {
+    get args(): T | undefined {
         return this._args;
     }
 
@@ -165,6 +165,4 @@ export class Event {
     }
 }
 
-export interface Listener {
-    (event: Event): void;
-}
+export type Listener<T = any> = (event: Event<T>) => void;
