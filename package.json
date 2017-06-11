@@ -5,7 +5,9 @@
   "main": "evented.js",
   "types": "evented.d.ts",
   "scripts": {
-    "build": "cd node_modules/.bin & tsc"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -15,13 +17,17 @@
     "typescript",
     "events"
   ],
-  "author": "Maroun Baydoun",
+  "author": {
+    "name": "Maroun Baydoun",
+    "url": "http://www.maroun-baydoun.com/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/maroun-baydoun/evented/issues"
   },
   "homepage": "https://github.com/maroun-baydoun/evented#readme",
   "devDependencies": {
+    "jasmine": "^2.6.0",
     "typescript": "^2.3.3"
   }
 }
