@@ -15,9 +15,9 @@ export class Evented {
 
   }
 
-  off(eventName: string, listener: Listener): void {
+  off(eventName: string, listener?: Listener): void {
 
-    Evented._off(this, eventName, listener);
+    Evented._off(eventName, this, listener);
   }
 
   fire<T>(eventName: string, eventArgs?: T, eventTarget: Object = this): void {
@@ -40,9 +40,9 @@ export class Evented {
     return Evented._on<T>(undefined, eventName, listener);
   }
 
-  static off(eventName: string, listener: Listener): void {
+  static off(eventName: string, listener?: Listener): void {
 
-    Evented._off(undefined, eventName, listener);
+    Evented._off(eventName, undefined, listener);
   }
 
   static listensTo(eventName: string): boolean {
@@ -64,17 +64,17 @@ export class Evented {
       listeners[eventName] = [];
     }
 
-    listeners[eventName].push(listener);
+    listeners[eventName]!.push(listener);
 
     return () => {
-      Evented._off(instance, eventName, listener);
+      Evented._off(eventName, instance, listener);
     };
 
   }
 
-  private static _off(instance: Evented | undefined, eventName: string, listener: Listener): void {
+  private static _off(eventName: string, instance?: Evented, listener?: Listener): void {
 
-    let eventListeners: Listener[],
+    let eventListeners: Listener[] | undefined,
       i: number,
       length: number,
       listeners: ListenerDictionary;
@@ -85,12 +85,17 @@ export class Evented {
       listeners = Evented.globalListeners;
     }
 
-    if (listeners[eventName] instanceof Array) {
-      eventListeners = listeners[eventName];
-      for (i = 0, length = eventListeners.length; i < length; i++) {
-        if (eventListeners[i] === listener) {
-          eventListeners.splice(i, 1);
-          break;
+    eventListeners = listeners[eventName];
+
+    if (eventListeners instanceof Array) {
+      if (!listener) {
+        listeners[eventName] = undefined;
+      } else {
+        for (i = 0, length = eventListeners.length; i < length; i++) {
+          if (eventListeners[i] === listener) {
+            eventListeners.splice(i, 1);
+            break;
+          }
         }
       }
     }
@@ -99,7 +104,7 @@ export class Evented {
 
   private static _fire<T>(instance: Evented | undefined, eventName: string, eventArgs?: T, eventTarget?: Object): void {
 
-    let eventListeners: Listener[],
+    let eventListeners: Listener[] | undefined,
       i: number,
       length: number,
       listeners: ListenerDictionary,
@@ -113,8 +118,9 @@ export class Evented {
       thisArg = Evented;
     }
 
-    if (listeners[eventName] instanceof Array) {
-      eventListeners = listeners[eventName];
+    eventListeners = listeners[eventName];
+
+    if (eventListeners instanceof Array) {
       for (i = 0, length = eventListeners.length; i < length; i++) {
         eventListeners[i].call(thisArg, new Event(eventName, eventArgs, eventTarget));
       }
@@ -131,7 +137,7 @@ export class Evented {
       listeners = Evented.globalListeners;
     }
 
-    return (listeners[eventName] instanceof Array && listeners[eventName].length > 0);
+    return (listeners[eventName] instanceof Array && listeners[eventName]!.length > 0);
   }
 }
 
@@ -160,4 +166,4 @@ export class Event<T = any> {
 }
 
 export type Listener<T = any> = (event: Event<T>) => void;
-type ListenerDictionary = { [eventName: string]: Listener[] };
+type ListenerDictionary = { [eventName: string]: Listener[] | undefined };

@@ -52,6 +52,21 @@ describe("User", () => {
     expect(fired).toBe(false);
   });
 
+  it("stops handling event listeners after off() is called without a listener", () => {
+    let fired = false;
+    let lisener1 = () => {fired = true; };
+    let lisener2 = () => {fired = true; };
+    user.on("loggedIn", lisener1);
+    user.on("loggedIn", lisener2);
+    user.fire("loggedIn");
+    expect(fired).toBe(true);
+
+    fired = false;
+    user.off("loggedIn");
+    user.fire("loggedIn");
+    expect(fired).toBe(false);
+  });
+
   it("stops handling an event after the function returned by on() is called", () => {
     let fired = false;
     let cancel = user.on("loggedIn", () => {fired = true; });
