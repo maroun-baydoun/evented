@@ -66,18 +66,14 @@ export class Evented {
 
     listeners[eventName]!.push(listener);
 
-    return () => {
-      Evented._off(eventName, instance, listener);
-    };
+    return () => Evented._off(eventName, instance, listener);
 
   }
 
   private static _off(eventName: string, instance?: Evented, listener?: Listener): void {
 
     let eventListeners: Listener[] | undefined,
-      i: number,
-      length: number,
-      listeners: ListenerDictionary;
+        listeners: ListenerDictionary;
 
     if (instance) {
       listeners = instance.listeners;
@@ -91,24 +87,16 @@ export class Evented {
       if (!listener) {
         listeners[eventName] = undefined;
       } else {
-        for (i = 0, length = eventListeners.length; i < length; i++) {
-          if (eventListeners[i] === listener) {
-            eventListeners.splice(i, 1);
-            break;
-          }
-        }
+        listeners[eventName] = eventListeners.filter((l) => l !== listener);
       }
     }
-
   }
 
   private static _fire<T>(instance: Evented | undefined, eventName: string, eventArgs?: T, eventTarget?: Object): void {
 
     let eventListeners: Listener[] | undefined,
-      i: number,
-      length: number,
-      listeners: ListenerDictionary,
-      thisArg: Evented | typeof Evented;
+        listeners: ListenerDictionary,
+        thisArg: Evented | typeof Evented;
 
     if (instance) {
       listeners = instance.listeners;
@@ -121,9 +109,9 @@ export class Evented {
     eventListeners = listeners[eventName];
 
     if (eventListeners instanceof Array) {
-      for (i = 0, length = eventListeners.length; i < length; i++) {
-        eventListeners[i].call(thisArg, new Event(eventName, eventArgs, eventTarget));
-      }
+      eventListeners.forEach((l) => {
+        l.call(thisArg, new Event(eventName, eventArgs, eventTarget));
+      });
     }
   }
 
