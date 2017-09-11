@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/maroun-baydoun/evented#readme",
   "devDependencies": {
-    "jasmine": "^2.6.0",
-    "typescript": "^2.3.3"
+    "jasmine": "2.6.0",
+    "@types/jasmine": "2.5.54",
+    "typescript": "2.5.2"
   }
 }
