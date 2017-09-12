@@ -62,4 +62,16 @@ describe("Evented", () => {
   it("returns false for listensTo() for an event that is not handled", () => {
     expect(Evented.listensTo("myEvent6")).toBe(false);
   });
+
+  it("returns an array of listeners for a handled event", () => {
+    let listener1 = () => {/*Handle event*/};
+    let listener2 = () => {/*Handle event*/};
+    Evented.on("myEvent7", listener1);
+    Evented.on("myEvent7", listener2);
+    expect(Evented.listeners("myEvent7")).toEqual([listener1, listener2]);
+  });
+
+  it("returns undefined for a an event that is not handled", () => {
+    expect(Evented.listeners("myEvent8")).toBeUndefined();
+  });
 });

@@ -8,6 +8,7 @@ obj.fire(eventName, eventArgs, eventTarget);
 obj.on(eventName, listener);
 obj.off(eventName, listener);
 obj.listensTo(eventName);
+obj.listeners(eventName);
 ```
 ###### Statically
 ```typescript
@@ -15,6 +16,7 @@ Evented.fire(eventName, eventArgs, eventTarget);
 Evented.on(eventName, listener);
 Evented.off(eventName, listener);
 Evented.listensTo(eventName);
+Evented.listeners(eventName);
 ```
 
 #### Usage example

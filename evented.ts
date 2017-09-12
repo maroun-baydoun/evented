@@ -1,18 +1,17 @@
 
 export class Evented {
 
-  private listeners: ListenerDictionary;
+  private _listeners: ListenerDictionary;
   private static globalListeners: ListenerDictionary = {};
 
   constructor() {
 
-    this.listeners = {};
+    this._listeners = {};
   }
 
   on<T>(eventName: string, listener: Listener<T>): () => void {
 
     return Evented._on<T>(this, eventName, listener);
-
   }
 
   off(eventName: string, listener?: Listener): void {
@@ -28,6 +27,11 @@ export class Evented {
   listensTo(eventName: string): boolean {
 
     return Evented._listensTo(this, eventName);
+  }
+
+  listeners(eventName: string): Listener[] | undefined {
+
+    return Evented._listeners(this, eventName);
   }
 
   static fire<T>(eventName: string, eventArgs?: T, eventTarget?: Object): void {
@@ -50,12 +54,17 @@ export class Evented {
     return Evented._listensTo(undefined, eventName);
   }
 
+  static listeners(eventName: string): Listener[] | undefined {
+
+    return Evented._listeners(undefined, eventName);
+  }
+
   private static _on<T>(instance: Evented | undefined, eventName: string, listener: Listener<T>): () => void {
 
     let listeners: ListenerDictionary;
 
     if (instance) {
-      listeners = instance.listeners;
+      listeners = instance._listeners;
     } else {
       listeners = Evented.globalListeners;
     }
@@ -73,10 +82,10 @@ export class Evented {
   private static _off(eventName: string, instance?: Evented, listener?: Listener): void {
 
     let eventListeners: Listener[] | undefined,
-        listeners: ListenerDictionary;
+      listeners: ListenerDictionary;
 
     if (instance) {
-      listeners = instance.listeners;
+      listeners = instance._listeners;
     } else {
       listeners = Evented.globalListeners;
     }
@@ -95,11 +104,11 @@ export class Evented {
   private static _fire<T>(instance: Evented | undefined, eventName: string, eventArgs?: T, eventTarget?: Object): void {
 
     let eventListeners: Listener[] | undefined,
-        listeners: ListenerDictionary,
-        thisArg: Evented | typeof Evented;
+      listeners: ListenerDictionary,
+      thisArg: Evented | typeof Evented;
 
     if (instance) {
-      listeners = instance.listeners;
+      listeners = instance._listeners;
       thisArg = instance;
     } else {
       listeners = Evented.globalListeners;
@@ -120,12 +129,25 @@ export class Evented {
     let listeners: ListenerDictionary;
 
     if (instance) {
-      listeners = instance.listeners;
+      listeners = instance._listeners;
     } else {
       listeners = Evented.globalListeners;
     }
 
     return (listeners[eventName] instanceof Array && listeners[eventName]!.length > 0);
+  }
+
+  private static _listeners(instance: Evented | undefined, eventName: string): Listener[] | undefined {
+
+    let listeners: ListenerDictionary;
+
+    if (instance) {
+      listeners = instance._listeners;
+    } else {
+      listeners = Evented.globalListeners;
+    }
+
+    return listeners[eventName];
   }
 }
 

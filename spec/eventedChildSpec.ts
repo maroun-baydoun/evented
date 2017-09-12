@@ -87,4 +87,16 @@ describe("User", () => {
   it("returns false for listensTo() for an event that is not handled", () => {
     expect(user.listensTo("loggedOut")).toBe(false);
   });
+
+  it("returns an array of listeners for a handled event", () => {
+    let listener1 = () => {/*Handle event*/};
+    let listener2 = () => {/*Handle event*/};
+    user.on("loggedIn", listener1);
+    user.on("loggedIn", listener2);
+    expect(user.listeners("loggedIn")).toEqual([listener1, listener2]);
+  });
+
+  it("returns undefined for a an event that is not handled", () => {
+    expect(Evented.listeners("myEvent8")).toBeUndefined();
+  });
 });
