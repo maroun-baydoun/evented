@@ -2,14 +2,12 @@
     "compilerOptions": {
         "target": "es5",
         "moduleResolution": "node",
-        "declaration": true,
-        "declarationDir": "./types",
+        "declaration": false,
         "strict": true,
         "sourceMap": false
     },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "spec"
+    "include": [
+        "./spec/"
     ]
+
 }

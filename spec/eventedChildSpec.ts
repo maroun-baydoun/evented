@@ -1,5 +1,5 @@
 
-import {Evented} from "../evented";
+import {Evented} from "../src/evented";
 
 class User extends Evented {
   loggedIn: boolean;

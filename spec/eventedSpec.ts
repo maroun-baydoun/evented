@@ -1,5 +1,5 @@
 
-import {Evented} from "../evented";
+import {Evented} from "../src/evented";
 
 describe("Evented", () => {
   it("handles a fired event with on()", () => {
