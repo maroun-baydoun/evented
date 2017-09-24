@@ -1,5 +1,6 @@
 # Evented
-Fire and listen to events in JavaScript
+[![npm version](https://badge.fury.io/js/evented-ts.svg)](https://badge.fury.io/js/evented-ts)
+###### Fire and listen to events in JavaScript
 
 #### Basic usage
 ###### On an Evented class instance
