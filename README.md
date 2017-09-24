@@ -1,5 +1,5 @@
 # Evented
-Fire and listen to events in TypeScript
+Fire and listen to events in JavaScript
 
 #### Basic usage
 ###### On an Evented class instance

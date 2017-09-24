@@ -1,13 +1,13 @@
 {
   "name": "evented-ts",
   "version": "1.0.4",
-  "description": "Fire and listen to events in TypeScript",
+  "description": "Fire and listen to events in JavaScript",
   "main": "./dist/evented.js",
   "types": "./dist/types/evented.d.ts",
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "tsc -p tsconfig-test.json && jasmine ./spec/*.js"
+    "test": "jasmine-ts ./spec/*.ts"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,9 @@
   },
   "homepage": "https://github.com/maroun-baydoun/evented#readme",
   "devDependencies": {
-    "jasmine": "2.6.0",
     "@types/jasmine": "2.5.54",
+    "jasmine": "2.6.0",
+    "jasmine-ts": "^0.2.1",
     "ts-loader": "2.3.7",
     "typescript": "2.5.2",
     "webpack": "3.6.0"
