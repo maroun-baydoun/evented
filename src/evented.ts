@@ -98,7 +98,11 @@ export class Evented {
 
     if (eventListeners instanceof Array) {
       eventListeners.forEach((l) => {
-        l.call(thisArg, new Event(eventName, eventArgs, eventTarget));
+        l.call(thisArg, {
+          name: eventName,
+          args: eventArgs,
+          target: eventTarget,
+        });
       });
     }
   }
@@ -128,29 +132,11 @@ export class Evented {
   }
 }
 
-export class Event<T = any> {
-  private _name: string;
-  private _args: T | undefined;
-  private _target: Object | undefined;
-
-  constructor(name: string, args?: T, target?: Object) {
-    this._name = name;
-    this._args = args;
-    this._target = target;
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
-  get args(): T | undefined {
-    return this._args;
-  }
-
-  get target(): Object | undefined {
-    return this._target;
-  }
-}
+export type Event<T = any> = {
+  name: string;
+  args?: T;
+  target?: Object;
+};
 
 export type Listener<T = any> = (event: Event<T>) => void;
 type ListenerDictionary = { [eventName: string]: Listener[] | undefined };
