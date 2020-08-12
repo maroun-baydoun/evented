@@ -3,6 +3,7 @@ tslint.json
 
 *.js
 !webpack.config.js
+!jest.config.js
 *.d.ts
 *.log
 *.map
