@@ -7,11 +7,11 @@ export class Evented {
   }
 
   on<T>(eventName: string, listener: Listener<T>): () => void {
-    return Evented._on<T>(this, eventName, listener);
+    return Evented._on<T>(eventName, listener, this);
   }
 
   off(eventName: string, listener?: Listener): void {
-    Evented._off(eventName, this, listener);
+    Evented._off(eventName, listener, this);
   }
 
   fire<T>(eventName: string, eventArgs?: T, eventTarget: Object = this): void {
@@ -31,11 +31,11 @@ export class Evented {
   }
 
   static on<T>(eventName: string, listener: Listener<T>): () => void {
-    return Evented._on<T>(undefined, eventName, listener);
+    return Evented._on<T>(eventName, listener);
   }
 
   static off(eventName: string, listener?: Listener): void {
-    Evented._off(eventName, undefined, listener);
+    Evented._off(eventName, listener);
   }
 
   static listensTo(eventName: string): boolean {
@@ -47,17 +47,13 @@ export class Evented {
   }
 
   private static _on<T>(
-    instance: Evented | undefined,
     eventName: string,
-    listener: Listener<T>
+    listener: Listener<T>,
+    instance?: Evented
   ): () => void {
-    let listeners: ListenerDictionary;
-
-    if (instance) {
-      listeners = instance._listeners;
-    } else {
-      listeners = Evented.globalListeners;
-    }
+    const listeners: ListenerDictionary = instance
+      ? instance._listeners
+      : Evented.globalListeners;
 
     if (listeners[eventName] === undefined) {
       listeners[eventName] = [];
@@ -65,23 +61,18 @@ export class Evented {
 
     listeners[eventName]!.push(listener);
 
-    return () => Evented._off(eventName, instance, listener);
+    return () => Evented._off(eventName, listener, instance);
   }
 
   private static _off(
     eventName: string,
-    instance?: Evented,
-    listener?: Listener
+    listener?: Listener,
+    instance?: Evented
   ): void {
-    let eventListeners: Listener[] | undefined, listeners: ListenerDictionary;
-
-    if (instance) {
-      listeners = instance._listeners;
-    } else {
-      listeners = Evented.globalListeners;
-    }
-
-    eventListeners = listeners[eventName];
+    const listeners: ListenerDictionary = instance
+      ? instance._listeners
+      : Evented.globalListeners;
+    const eventListeners: Listener[] | undefined = listeners[eventName];
 
     if (eventListeners instanceof Array) {
       if (!listener) {
@@ -98,19 +89,12 @@ export class Evented {
     eventArgs?: T,
     eventTarget?: Object
   ): void {
-    let eventListeners: Listener[] | undefined,
-      listeners: ListenerDictionary,
-      thisArg: Evented | typeof Evented;
+    const listeners: ListenerDictionary = instance
+      ? instance._listeners
+      : Evented.globalListeners;
+    const thisArg: Evented | typeof Evented = instance || Evented;
 
-    if (instance) {
-      listeners = instance._listeners;
-      thisArg = instance;
-    } else {
-      listeners = Evented.globalListeners;
-      thisArg = Evented;
-    }
-
-    eventListeners = listeners[eventName];
+    const eventListeners: Listener[] | undefined = listeners[eventName];
 
     if (eventListeners instanceof Array) {
       eventListeners.forEach((l) => {
@@ -123,13 +107,9 @@ export class Evented {
     instance: Evented | undefined,
     eventName: string
   ): boolean {
-    let listeners: ListenerDictionary;
-
-    if (instance) {
-      listeners = instance._listeners;
-    } else {
-      listeners = Evented.globalListeners;
-    }
+    const listeners: ListenerDictionary = instance
+      ? instance._listeners
+      : Evented.globalListeners;
 
     return (
       listeners[eventName] instanceof Array && listeners[eventName]!.length > 0
@@ -140,13 +120,9 @@ export class Evented {
     instance: Evented | undefined,
     eventName: string
   ): Listener[] | undefined {
-    let listeners: ListenerDictionary;
-
-    if (instance) {
-      listeners = instance._listeners;
-    } else {
-      listeners = Evented.globalListeners;
-    }
+    const listeners: ListenerDictionary = instance
+      ? instance._listeners
+      : Evented.globalListeners;
 
     return listeners[eventName];
   }
