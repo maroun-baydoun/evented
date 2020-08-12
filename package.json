@@ -14,7 +14,10 @@
     "build": "webpack --config webpack.config.js",
     "test": "jest test",
     "test:watch": "jest test --watch",
-    "prettier:write": "prettier --write './{src,test}/**/*.ts'"
+    "prettier:write": "prettier --write './{src,test}/**/*.ts'",
+    "preversion": "npm test",
+    "version": "rm -rf dist && rm -rf types && npm run build",
+    "postversion": "git push --tags"
   },
   "repository": {
     "type": "git",
@@ -26,7 +29,7 @@
   ],
   "author": {
     "name": "Maroun Baydoun",
-    "url": "http://www.maroun-baydoun.com/"
+    "url": "https://www.maroun-baydoun.com/"
   },
   "license": "MIT",
   "bugs": {
