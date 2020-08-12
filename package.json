@@ -3,11 +3,18 @@
   "version": "1.0.4",
   "description": "Fire and listen to events in JavaScript",
   "main": "./dist/evented.js",
-  "types": "./dist/types/evented.d.ts",
+  "types": "./types/evented.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "README.md",
+    "LICENSE.md"
+  ],
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "test": "jest test",
-    "test:watch": "jest test --watch"
+    "test:watch": "jest test --watch",
+    "prettier:write": "prettier --write './{src,test}/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -29,6 +36,7 @@
   "devDependencies": {
     "@types/jest": "26.0.8",
     "jest": "26.2.2",
+    "prettier": "2.0.5",
     "ts-jest": "26.1.4",
     "ts-loader": "8.0.2",
     "typescript": "3.9.7",

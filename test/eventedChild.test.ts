@@ -1,23 +1,21 @@
-
-import {Evented} from "../src/evented";
+import { Evented } from "../src/evented";
 
 class User extends Evented {
   loggedIn: boolean = false;
 
   logIn = () => {
     this.loggedIn = true;
-    this.fire("loggedIn", {time: Util.getNow()});
-  }
+    this.fire("loggedIn", { time: Util.getNow() });
+  };
 }
 
 class Util {
-  static getNow = (): Date =>  {
+  static getNow = (): Date => {
     return new Date();
-  }
+  };
 }
 
 describe("User", () => {
-
   let user: User;
   let now: Date;
 
@@ -29,7 +27,7 @@ describe("User", () => {
 
   it("handles a fired event with on()", () => {
     let fired = false;
-    user.on<{time: Date}>("loggedIn", (e) => {
+    user.on<{ time: Date }>("loggedIn", (e) => {
       fired = true;
       expect(e.args).toBeDefined();
       expect(e.args!.hasOwnProperty("time")).toBe(true);
@@ -41,7 +39,9 @@ describe("User", () => {
 
   it("stops handling an event after off() is called", () => {
     let fired = false;
-    let lisener = () => {fired = true; };
+    let lisener = () => {
+      fired = true;
+    };
     user.on("loggedIn", lisener);
     user.logIn();
     expect(fired).toBe(true);
@@ -54,8 +54,12 @@ describe("User", () => {
 
   it("stops handling event listeners after off() is called without a listener", () => {
     let fired = false;
-    let lisener1 = () => {fired = true; };
-    let lisener2 = () => {fired = true; };
+    let lisener1 = () => {
+      fired = true;
+    };
+    let lisener2 = () => {
+      fired = true;
+    };
     user.on("loggedIn", lisener1);
     user.on("loggedIn", lisener2);
     user.fire("loggedIn");
@@ -69,7 +73,9 @@ describe("User", () => {
 
   it("stops handling an event after the function returned by on() is called", () => {
     let fired = false;
-    let cancel = user.on("loggedIn", () => {fired = true; });
+    let cancel = user.on("loggedIn", () => {
+      fired = true;
+    });
     user.logIn();
     expect(fired).toBe(true);
 
@@ -80,7 +86,9 @@ describe("User", () => {
   });
 
   it("returns true for listensTo() for an event that is handled", () => {
-    user.on("loggedIn", () => { /*Handle event*/});
+    user.on("loggedIn", () => {
+      /*Handle event*/
+    });
     expect(user.listensTo("loggedIn")).toBe(true);
   });
 
@@ -89,8 +97,12 @@ describe("User", () => {
   });
 
   it("returns an array of listeners for a handled event", () => {
-    let listener1 = () => {/*Handle event*/};
-    let listener2 = () => {/*Handle event*/};
+    let listener1 = () => {
+      /*Handle event*/
+    };
+    let listener2 = () => {
+      /*Handle event*/
+    };
     user.on("loggedIn", listener1);
     user.on("loggedIn", listener2);
     expect(user.listeners("loggedIn")).toEqual([listener1, listener2]);

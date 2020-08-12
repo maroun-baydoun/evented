@@ -7,6 +7,9 @@
         "strict": true,
         "sourceMap": false
     },
+    "files": [
+        "./src/evented.ts"
+    ],
     "exclude": [
         "node_modules",
         "dist",
