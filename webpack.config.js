@@ -1,33 +1,42 @@
-const path = require('path')
+const { resolve } = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const PATHS = {
-  src: path.join(__dirname, './src'),
-  dist: path.join(__dirname, './dist')
-}
+  src: resolve(__dirname, "./src"),
+  dist: resolve(__dirname, "./dist"),
+};
 
 module.exports = {
-  mode: 'production',
+  mode: "production",
   entry: {
-    'evented': PATHS.src + '/evented.ts'
+    evented: resolve(PATHS.src, "evented.ts"),
   },
   output: {
     path: PATHS.dist,
-    filename: '[name].js',
-    library: 'evented-ts',
-    libraryTarget: 'umd',
+    filename: "[name].js",
+    library: "evented-ts",
+    libraryTarget: "umd",
     umdNamedDefine: true,
-    globalObject: 'this'
+    globalObject: "this",
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/
-      }
+        loader: "ts-loader",
+        exclude: /node_modules/,
+      },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        resolve(__dirname, "dist"),
+        resolve(__dirname, "types"),
+      ],
+    }),
+  ],
   resolve: {
-    extensions: ['.ts', '.js']
-  }
-}
+    extensions: [".ts", ".js"],
+  },
+};
