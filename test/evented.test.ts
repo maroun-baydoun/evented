@@ -1,75 +1,77 @@
-import { Evented } from "../src/evented";
+import evented from "../src/evented";
+
+const { on, off, fire, listensTo, listeners } = evented();
 
 describe("Evented", () => {
   it("handles a fired event with on()", () => {
     let fired = false;
-    Evented.on<{ myArg: string }>("myEvent1", (e) => {
+    on<{ myArg: string }>("myEvent1", (e) => {
       fired = true;
       expect(e.args).toBeDefined();
       expect(e.args!.hasOwnProperty("myArg")).toBe(true);
       expect(e.args!.myArg).toBe("Some random value");
     });
-    Evented.fire("myEvent1", { myArg: "Some random value" });
+    fire("myEvent1", { myArg: "Some random value" });
     expect(fired).toBe(true);
   });
 
   it("stops handling an event after off() is called", () => {
     let fired = false;
-    let lisener = () => {
+    let listener = () => {
       fired = true;
     };
-    Evented.on("myEvent2", lisener);
-    Evented.fire("myEvent2");
+    on("myEvent2", listener);
+    fire("myEvent2");
     expect(fired).toBe(true);
 
     fired = false;
-    Evented.off("myEvent2", lisener);
-    Evented.fire("myEvent2");
+    off("myEvent2", listener);
+    fire("myEvent2");
     expect(fired).toBe(false);
   });
 
   it("stops handling event listeners after off() is called without a listener", () => {
     let fired = false;
-    let lisener1 = () => {
+    let listener1 = () => {
       fired = true;
     };
-    let lisener2 = () => {
+    let listener2 = () => {
       fired = true;
     };
-    Evented.on("myEvent3", lisener1);
-    Evented.on("myEvent3", lisener2);
-    Evented.fire("myEvent3");
+    on("myEvent3", listener1);
+    on("myEvent3", listener2);
+    fire("myEvent3");
     expect(fired).toBe(true);
 
     fired = false;
-    Evented.off("myEvent3");
-    Evented.fire("myEvent3");
+    off("myEvent3");
+    fire("myEvent3");
     expect(fired).toBe(false);
   });
 
   it("stops handling an event after the function returned by on() is called", () => {
     let fired = false;
-    let cancel = Evented.on("myEvent4", () => {
+    let cancel = on("myEvent4", () => {
       fired = true;
     });
-    Evented.fire("myEvent4");
+    fire("myEvent4");
     expect(fired).toBe(true);
 
     fired = false;
     cancel();
-    Evented.fire("myEvent4");
+    fire("myEvent4");
     expect(fired).toBe(false);
   });
 
   it("returns true for listensTo() for an event that is handled", () => {
-    Evented.on("myEvent5", () => {
+    on("myEvent5", () => {
       /*Handle event*/
     });
-    expect(Evented.listensTo("myEvent5")).toBe(true);
+    expect(listensTo("myEvent5")).toBe(true);
   });
 
   it("returns false for listensTo() for an event that is not handled", () => {
-    expect(Evented.listensTo("myEvent6")).toBe(false);
+    expect(listensTo("myEvent6")).toBe(false);
   });
 
   it("returns an array of listeners for a handled event", () => {
@@ -79,12 +81,12 @@ describe("Evented", () => {
     let listener2 = () => {
       /*Handle event*/
     };
-    Evented.on("myEvent7", listener1);
-    Evented.on("myEvent7", listener2);
-    expect(Evented.listeners("myEvent7")).toEqual([listener1, listener2]);
+    on("myEvent7", listener1);
+    on("myEvent7", listener2);
+    expect(listeners("myEvent7")).toEqual([listener1, listener2]);
   });
 
   it("returns undefined for a an event that is not handled", () => {
-    expect(Evented.listeners("myEvent8")).toBeUndefined();
+    expect(listeners("myEvent8")).toBeUndefined();
   });
 });

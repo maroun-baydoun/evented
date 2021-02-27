@@ -14,44 +14,40 @@ Or
 yarn add evented-ts
 ```
 
-#### Basic usage
-###### On an Evented class instance
+#### Import
 ```typescript
-obj.fire(eventName, eventArgs, eventTarget);
-obj.on(eventName, listener);
-obj.off(eventName, listener);
-obj.listensTo(eventName);
-obj.listeners(eventName);
+import evented from "evented-ts";
 ```
-###### Statically
-```typescript
-Evented.fire(eventName, eventArgs, eventTarget);
-Evented.on(eventName, listener);
-Evented.off(eventName, listener);
-Evented.listensTo(eventName);
-Evented.listeners(eventName);
-```
+
+#### API
+
+##### evented.fire(eventName: string, eventArgs?: any): void;
+
+Fires an event with optional arguments.
+
+##### evented.on(eventName: string, listener: (e: Event) => void): () => void;
+
+Listens to an event. Returns a function that removes the listener when invoked.
+
+##### evented.off(eventName: string, listener?: (e: Event) => void): void;
+
+Removes the given listener for the event name. Otherwise removes all listeners for the event name.
+
+##### evented.listensTo(eventName: string): boolean;
+
+Returns whether listeners exist for a given event name.
+
+##### evented.listeners(eventName: string): Array<(event: Event<T>) => void>;
+
+Returns listeners for a given event name.
+
 
 #### Usage example
 
 ```typescript
-class User extends Evented {
-  ...
-}
+import evented from "evented-ts";
 
-let user = new User();
+evented.on("hello", (e) => console.log("hello", e.args));
 
-user.on("loggedIn", (e) => {
-  //Do something on user login
-});
-
-//Fire the event after authentication
-user.fire("loggedIn");
-
-Evented.on("userLoggedOut", (e) => {
-  //Do something on user logout
-});
-
-//Fire the event after user logout
-Evented.fire("userLoggedOut");
+evented.fire("hello", "world");
 ```
