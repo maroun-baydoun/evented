@@ -62,16 +62,16 @@ evented.fire("hello", "world");</code></pre>
         <h4>evented.fire(eventName: string, eventArgs?: any): void;</h4>
         <p>Fires an event with optional arguments.</p>
         <hr class="hr--medium"/>
-        <h4>evented.on(eventName: string, listener: (e: Event) => void): () => void;</h4>
+        <h4>evented.on(eventName: string, listener: (e: Event) =&gt; void): () =&gt; void;</h4>
         <p>Listens to an event. Returns a function that removes the listener when invoked.</p>
         <hr class="hr--medium"/>
-        <h4>evented.off(eventName: string, listener?: (e: Event) => void): void;</h4>
+        <h4>evented.off(eventName: string, listener?: (e: Event) =&gt; void): void;</h4>
         <p>Removes the given listener for the event name. Otherwise removes all listeners for the event name.</p>
         <hr class="hr--medium"/>
         <h4>evented.listensTo(eventName: string): boolean;</h4>
         <p>Returns whether listeners exist for a given event name.</p>
         <hr class="hr--medium"/>
-        <h4>evented.listeners(eventName: string): Array<(event: Event) => void>;</h4>
+        <h4>evented.listeners(eventName: string): Array&lt;(event: Event) =&gt; void&gt;;</h4>
         <p>Returns listeners for a given event name.</p>
 
         <%if (htmlWebpackPlugin.options.linkHome) { %>
