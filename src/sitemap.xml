@@ -10,6 +10,10 @@
   <loc>https://dev.maroun-baydoun.com/</loc>
   <changefreq>weekly</changefreq>
 </url>
+<url>
+  <loc>https://dev.maroun-baydoun.com/evented/</loc>
+  <changefreq>weekly</changefreq>
+</url>
 
 
 </urlset>

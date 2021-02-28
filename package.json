@@ -46,6 +46,11 @@
   },
   "features": {
     "react": false,
-    "prismjs": false
+    "prismjs": {
+      "languages": [
+        "shell",
+        "javascript"
+      ]
+    }
   }
 }
