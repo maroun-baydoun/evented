@@ -1,0 +1,30 @@
+@import "mixins";
+
+.ul {
+  &:not(&--condensed) {
+    li:not(:last-child) {
+      @include margin-bottom(1);
+    }
+  }
+
+  &--margin-left {
+    li {
+      @include margin-left(3);
+    }
+  }
+
+  &--margin-top {
+    @include margin-top(1);
+  }
+
+  &--condensed {
+    li {
+      @include margin-top(0);
+      @include margin-bottom(0);
+    }
+  }
+
+  &--square {
+    list-style: square;
+  }
+}

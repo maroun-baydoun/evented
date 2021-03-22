@@ -9,6 +9,11 @@
     <title><%= htmlWebpackPlugin.options.title %> | Maroun Baydoun</title>
     <meta name="description" content="<%= htmlWebpackPlugin.options.description%>">
     <link rel="canonical" href="https://dev.maroun-baydoun.com/<%= htmlWebpackPlugin.options.subPath %>" />
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <meta property="og:title" content="<%= htmlWebpackPlugin.options.title %>" />
     <meta property="og:description" content="<%= htmlWebpackPlugin.options.description%>" />
     <meta property="og:type" content="website" />
@@ -20,10 +25,8 @@
     <meta name="twitter:creator" content="@maroun_baydoun">
     <meta name="twitter:title" content="<%= htmlWebpackPlugin.options.title %>">
     <meta name="twitter:description" content="<%= htmlWebpackPlugin.options.description%>">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -88,7 +91,7 @@ evented.fire("hello", "world");</code></pre>
             <a href="https://www.linkedin.com/in/marounbaydoun" rel="external noopener noreferrer" target="_blank">Linkedin</a>
         </div>
         <div class="footer__credits">
-            &copy;<a href="https://maroun-baydoun.com">Maroun Baydoun</a>
+            &copy;<a href="https://maroun-baydoun.com" rel="author">Maroun Baydoun</a>
         </div>
     </footer>
     <%if (process.env.NODE_ENV==="production" ) { %>
