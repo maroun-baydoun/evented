@@ -51,3 +51,12 @@ evented.on("hello", (e) => console.log("hello", e.args));
 
 evented.fire("hello", "world");
 ```
+
+#### Demo
+
+See it running in action in this [demo](https://dev.maroun-baydoun.com/evented/#demo).
+
+
+#### License
+MIT
+Copyright (c) [Maroun Baydoun](https://maroun-baydoun.com/).
