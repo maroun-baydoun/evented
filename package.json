@@ -45,6 +45,7 @@
   "dependencies": {
     "@fontsource/cutive-mono": "4.2.2",
     "@fontsource/roboto": "4.2.2",
+    "evented-ts": "2.0.0",
     "prismjs": "1.23.0"
   },
   "features": {
