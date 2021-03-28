@@ -1,7 +1,7 @@
 {
-  "name": "evented",
-  "short_name": "evented",
-  "description": "Fire and listen to events in JavaScript",
+  "name": "evented - Custom events in JavaScript",
+  "short_name": "evented - Custom events in JavaScript",
+  "description": "Fire and listen to custom events in JavaScript. Try the demo, check the code on Github and get the package on npm.",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
