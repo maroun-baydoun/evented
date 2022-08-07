@@ -5,7 +5,8 @@
         "declaration": true,
         "outDir": "dist",
         "strict": true,
-        "sourceMap": false
+        "sourceMap": false,
+        "esModuleInterop": true
     },
     "files": [
         "./src/evented.ts"
