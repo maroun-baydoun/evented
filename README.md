@@ -5,18 +5,25 @@
 
 #### Install
 
-```
+```shell
 npm i evented-ts
 ```
 Or
 
-```
+```shell
 yarn add evented-ts
 ```
 
-#### Import
+#### Usage
 ```typescript
-import evented from "evented-ts";
+import create from "evented-ts";
+
+
+const evented = create();
+
+evented.on("hello", (e) => console.log("hello", e.args));
+            
+evented.fire("hello", "world");
 ```
 
 #### API
@@ -41,16 +48,6 @@ Returns whether listeners exist for a given event name.
 
 Returns listeners for a given event name.
 
-
-#### Usage example
-
-```typescript
-import evented from "evented-ts";
-
-evented.on("hello", (e) => console.log("hello", e.args));
-
-evented.fire("hello", "world");
-```
 
 #### Demo
 
