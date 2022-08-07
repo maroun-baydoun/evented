@@ -3,7 +3,7 @@
         "target": "es5",
         "moduleResolution": "node",
         "declaration": true,
-        "declarationDir": "./types",
+        "outDir": "dist",
         "strict": true,
         "sourceMap": false
     },

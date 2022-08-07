@@ -1,7 +1,7 @@
 
 tslint.json
 
-*.js
+dist
 !webpack.config.js
 !jest.config.js
 *.d.ts
