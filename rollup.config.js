@@ -1,11 +1,22 @@
 import typescript from "@rollup/plugin-typescript";
+import path from "path";
 
-export default {
+const plugins = [typescript()];
+
+export default [{
   input: "src/evented.ts",
   output: {
-    dir: "dist",
+    file: path.resolve("dist", "evented.cjs.js"),
     format: "cjs",
     exports: "default",
   },
-  plugins: [typescript()],
-};
+  plugins,
+}, {
+  input: "src/evented.ts",
+  output: {
+    file: path.resolve("dist", "evented.js"),
+    format: "esm",
+    exports: "default",
+  },
+  plugins,
+}];
