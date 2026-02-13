@@ -1,6 +1,6 @@
 {
   "name": "evented-ts",
-  "version": "2.1.0-beta.3",
+  "version": "2.1.0",
   "description": "Fire and listen to events in JavaScript",
   "type": "module",
   "main": "./dist/evented.cjs.js",
