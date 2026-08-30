@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["DOM", "ES2020"],
+    "types": ["vite/client"],
+    "paths": {
+      "evented-ts": ["../../packages/evented/src/evented.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

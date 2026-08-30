@@ -2,7 +2,9 @@ export type Event<T = any> = {
   name: string;
   args?: T;
 };
+
 export type Listener<T = any> = (event: Event<T>) => void;
+
 type ListenerDictionary = { [eventName: string]: Listener[] | undefined };
 
 const create = () => {

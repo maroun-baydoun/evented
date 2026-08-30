@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">evented — Fire and listen to events in JavaScript.</title>
+  <desc id="description">evented is a small JavaScript event emitter.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)" />
+  <rect width="760" height="630" fill="#020617" opacity=".82" />
+  <g id="project-specific-graphic" transform="translate(790 105)">
+    <rect width="350" height="420" rx="34" fill="#07111f" stroke="#475569" stroke-width="3" />
+    <path d="M112 210C157 210 164 92 220 92M112 210h108M112 210c45 0 52 118 108 118" fill="none" stroke="#67e8f9" stroke-linecap="round" stroke-width="4" opacity=".85" />
+    <circle cx="92" cy="210" r="62" fill="#082f49" stroke="#67e8f9" stroke-width="4" filter="url(#glow)" />
+    <circle cx="92" cy="210" r="76" fill="none" stroke="#67e8f9" stroke-dasharray="3 14" stroke-linecap="round" stroke-width="3" opacity=".45" />
+    <path d="m96 165-24 50h22l-7 40 28-56H93Z" fill="#67e8f9" />
+    <g fill="#0f2738" stroke="#67e8f9" stroke-width="3">
+      <rect x="210" y="52" width="106" height="80" rx="18" />
+      <rect x="210" y="170" width="106" height="80" rx="18" />
+      <rect x="210" y="288" width="106" height="80" rx="18" />
+    </g>
+    <g fill="none" stroke="#a7f3d0" stroke-linecap="round" stroke-width="3">
+      <path d="M235 106c4-10 8-10 12 0s8 10 12 0 8-10 12 0" />
+      <path d="M235 224c4-10 8-10 12 0s8 10 12 0 8-10 12 0" />
+      <path d="M235 342c4-10 8-10 12 0s8 10 12 0 8-10 12 0" />
+    </g>
+  </g>
+  <g font-family="Avenir Next, Segoe UI, Helvetica Neue, Arial, sans-serif">
+    <text x="78" y="270" fill="#f8fafc" font-size="98" font-weight="650" letter-spacing="-3">evented</text>
+    <text x="84" y="342" fill="#67e8f9" font-size="34" font-weight="600">Fire and listen to events in JavaScript.</text>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+packages:
+  - "packages/*"
+  - "apps/*"
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+catalog:
+  "@tailwindcss/vite": 4.3.3
+  "@types/node": 26.1.2
+  prettier: 3.9.6
+  rimraf: 6.1.3
+  sharp: 0.34.5
+  tailwindcss: 4.3.3
+  typescript: 6.0.3
+  vite: 8.1.5
+  vitest: 3.2.4

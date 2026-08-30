@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "rootDir": "./src",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist"
+  },
+  "files": ["./src/evented.ts"]
+}

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="evented-ts is an open source JavaScript library for firing and listening to events."
+    />
+    <link rel="canonical" href="https://dev.maroun-baydoun.com/evented/" />
+    <meta property="og:title" content="Evented | Fire and Listen to Events" />
+    <meta
+      property="og:description"
+      content="evented-ts is an open source JavaScript library for firing and listening to events."
+    />
+    <meta
+      property="og:image"
+      content="https://dev.maroun-baydoun.com/evented/og.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://dev.maroun-baydoun.com/evented/og.jpg"
+    />
+    <title>Evented | Fire and Listen to Events</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "evented-ts",
+        "description": "evented-ts is an open source JavaScript library for firing and listening to events.",
+        "programmingLanguage": "TypeScript",
+        "runtimePlatform": "Web",
+        "isAccessibleForFree": true,
+        "license": "https://opensource.org/license/mit/",
+        "maintainer": {
+          "@type": "Person",
+          "name": "Maroun Baydoun",
+          "url": "https://maroun-baydoun.com/"
+        },
+        "codeRepository": "https://github.com/maroun-baydoun/evented",
+        "url": "https://github.com/maroun-baydoun/evented"
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header>
+        <div>
+          <h1>Evented</h1>
+        </div>
+        <nav aria-label="Project links">
+          <a
+            href="https://github.com/maroun-baydoun/evented"
+            rel="noreferrer"
+            target="_blank"
+          >
+            ★ Github
+          </a>
+          <a
+            href="https://badge.fury.io/js/evented-ts"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img
+              alt="npm version"
+              src="https://badge.fury.io/js/evented-ts.svg"
+            />
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-content">
+            <h2 class="hero-title">Fire and listen to events in JavaScript.</h2>
+            <p class="hero-intro">
+              Create, listen for, and fire custom events with a minimal
+              JavaScript API.
+            </p>
+          </div>
+
+          <snippet-card title="Example" language-label="TypeScript">
+            <div data-snippet-header>
+              <span data-snippet-title></span>
+              <span data-snippet-language></span>
+            </div>
+            <pre><code data-code="example" data-language="typescript"></code></pre>
+            <snippet-copy-button>Copy</snippet-copy-button>
+          </snippet-card>
+        </section>
+
+        <section
+          class="page-section"
+          aria-labelledby="live-events-heading"
+          data-project-specific
+        >
+          <div class="section-header">
+            <div class="flex items-center gap-3">
+              <span class="relative inline-flex h-3 w-3" aria-hidden="true">
+                <span
+                  class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60 opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex h-3 w-3 rounded-full bg-accent"
+                ></span>
+              </span>
+              <h3 id="live-events-heading">Live events</h3>
+            </div>
+            <p class="section-header-intro">
+              Fire an event and watch a listener receive its payload.
+            </p>
+          </div>
+
+          <div class="event-controls">
+            <label for="event-payload">Event payload</label>
+            <div class="event-controls-row">
+              <input id="event-payload" value="Hello from Evented" />
+              <button type="button" data-fire-event>Fire event</button>
+            </div>
+          </div>
+
+          <div class="event-result" data-event-result>
+            <div class="section-card-head">
+              <h4>hello listener</h4>
+              <span class="section-card-status" data-event-status>waiting</span>
+            </div>
+            <p class="section-card-body" data-event-message>
+              Nothing received yet.
+            </p>
+          </div>
+        </section>
+
+        <section class="page-section">
+          <div class="section-header">
+            <h3>Install</h3>
+            <p class="section-header-intro">
+              Install evented-ts with the package manager of your choice.
+            </p>
+          </div>
+
+          <chip-tabs data-default-tab="npm" id="install-tabs">
+            <div data-tablist aria-label="Package manager">
+              <button type="button" data-tab="npm">npm</button>
+              <button type="button" data-tab="pnpm">pnpm</button>
+              <button type="button" data-tab="yarn">yarn</button>
+            </div>
+
+            <div data-tab-panels>
+              <snippet-card data-tab-panel="npm" data-active="true">
+                <pre><code data-code="install-npm" data-language="shell"></code></pre>
+                <snippet-copy-button>Copy</snippet-copy-button>
+              </snippet-card>
+              <snippet-card data-tab-panel="pnpm" data-active="false">
+                <pre><code data-code="install-pnpm" data-language="shell"></code></pre>
+                <snippet-copy-button>Copy</snippet-copy-button>
+              </snippet-card>
+              <snippet-card data-tab-panel="yarn" data-active="false">
+                <pre><code data-code="install-yarn" data-language="shell"></code></pre>
+                <snippet-copy-button>Copy</snippet-copy-button>
+              </snippet-card>
+            </div>
+          </chip-tabs>
+        </section>
+
+        <section class="page-section" aria-labelledby="api-heading">
+          <div class="section-header">
+            <h3 id="api-heading">API</h3>
+            <p class="section-header-intro">
+              evented-ts exposes a small runtime API for managing listeners.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="space-y-3">
+              <h4>create()</h4>
+              <p class="text-sm leading-6 text-muted">
+                Creates an isolated event emitter with its own listener
+                registry.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <h4>on(eventName, listener)</h4>
+              <p class="text-sm leading-6 text-muted">
+                Registers a listener and returns a function that removes it.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <h4>fire(eventName, eventArgs?)</h4>
+              <p class="text-sm leading-6 text-muted">
+                Fires an event and passes its name and optional arguments to
+                each listener.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <h4>off(eventName, listener?)</h4>
+              <p class="text-sm leading-6 text-muted">
+                Removes a specific listener, or all listeners for the event when
+                no listener is supplied.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <h4>listensTo(eventName) and listeners(eventName)</h4>
+              <p class="text-sm leading-6 text-muted">
+                Inspect whether an event has listeners and retrieve its listener
+                array.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <nav>
+          <a
+            class="transition-colors hover:text-foreground-strong"
+            href="https://dev.maroun-baydoun.com/"
+          >
+            See other projects
+          </a>
+          <a
+            class="transition-colors hover:text-foreground-strong"
+            href="https://www.npmjs.com/package/evented-ts"
+            rel="noreferrer"
+            target="_blank"
+          >
+            npm
+          </a>
+          <a
+            class="transition-colors hover:text-foreground-strong"
+            href="https://github.com/maroun-baydoun/evented"
+            rel="noreferrer"
+            target="_blank"
+          >
+            github
+          </a>
+        </nav>
+        <span>
+          © <copyright-year>2026</copyright-year>
+          <a
+            class="transition-colors hover:text-foreground-strong"
+            href="https://maroun-baydoun.com/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Maroun Baydoun
+          </a>
+        </span>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+@reference "../../style.css";
+
+@layer base {
+  snippet-card {
+    @apply relative block w-full min-w-0 rounded-2xl border border-border/80 bg-surface-elevated/80 p-5 pb-14 shadow-2xl shadow-black/20;
+  }
+
+  snippet-card [data-snippet-header] {
+    @apply mb-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-muted;
+  }
+
+  snippet-card[inline] {
+    @apply w-full py-3.5;
+
+    @variant md {
+      @apply inline-block w-auto max-w-180 min-w-[14ch] align-top py-4;
+    }
+  }
+
+  snippet-card pre {
+    @apply w-full min-w-0 overflow-x-auto text-sm leading-6 text-snippet-foreground;
+  }
+
+  snippet-card:not([inline]) pre {
+    @apply pr-16;
+  }
+
+  snippet-card[inline] pre {
+    @apply pr-12;
+
+    @variant md {
+      @apply w-max pr-12;
+    }
+  }
+
+  snippet-card code {
+    @apply block min-w-0;
+  }
+
+  snippet-card .token-keyword {
+    @apply text-snippet-keyword;
+  }
+
+  snippet-card .token-string {
+    @apply text-snippet-string;
+  }
+
+  snippet-card .token-identifier {
+    @apply text-snippet-identifier;
+  }
+
+  snippet-card .token-operator {
+    @apply text-snippet-operator;
+  }
+
+  snippet-card .token-punctuation {
+    @apply text-snippet-punctuation;
+  }
+
+  snippet-card .token-comment {
+    @apply text-snippet-comment;
+  }
+}

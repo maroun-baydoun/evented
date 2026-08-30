@@ -1,11 +1,7 @@
 
-tslint.json
-
-dist
-!webpack.config.js
-!jest.config.js
+node_modules/
+.pnpm-store/
+dist/
 *.d.ts
 *.log
 *.map
-
-node_modules/*
