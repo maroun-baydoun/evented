@@ -2,14 +2,12 @@
   "name": "evented-ts",
   "version": "2.1.0",
   "description": "Fire and listen to events in JavaScript",
-  "main": "./dist/evented.cjs.js",
-  "module": "./dist/evented.js",
+  "main": "./dist/evented.js",
   "types": "./dist/evented.d.ts",
   "exports": {
     ".": {
       "types": "./dist/evented.d.ts",
-      "import": "./dist/evented.js",
-      "require": "./dist/evented.cjs.js"
+      "import": "./dist/evented.js"
     }
   },
   "type": "module",
