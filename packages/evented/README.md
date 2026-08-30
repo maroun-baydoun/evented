@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/evented-ts.svg)](https://www.npmjs.com/package/evented-ts)
 
-Fire and listen to events in JavaScript and TypeScript with a small, dependency-free event emitter.
+Fire and listen to events in JavaScript.
 
 ## Installation
 
@@ -25,12 +25,11 @@ import create from "evented-ts";
 
 const evented = create();
 
-const stopListening = evented.on("hello", (event) => {
+evented.on("hello", (event) => {
   console.log(event.args);
 });
 
 evented.fire("hello", "world");
-stopListening();
 ```
 
 Listeners receive an event object with the event `name` and optional `args`:
@@ -76,7 +75,11 @@ const listener = (event: Event) => {
 };
 
 evented.on("message", listener);
+
+// Remove only this listener.
 evented.off("message", listener);
+
+// Remove all listeners for "message".
 evented.off("message");
 ```
 
@@ -87,14 +90,6 @@ Returns `true` when the event has one or more listeners, otherwise `false`.
 ### `evented.listeners(eventName)`
 
 Returns the registered listeners for an event, or `undefined` when no listeners have been registered.
-
-## TypeScript
-
-`Event<T>` and `Listener<T>` are exported for use in typed integrations:
-
-```typescript
-import type { Event, Listener } from "evented-ts";
-```
 
 ## License
 
